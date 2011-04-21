@@ -13,19 +13,8 @@ module ChiliprojectAutoWiki
             case name
             when 'wiki'
               config = Setting.plugin_chiliproject_auto_wiki
-              if project.present? &&
-                  config.present? &&
-                  config['project_id'].present? &&
-                  config['wiki_page_name'].present?
-
-                # Valid page?
-                source_project = Project.find_by_id(config['project_id'])
-                if source_project
-                  source_page = Wiki.find_page(config['wiki_page_name'], :project => source_project)
-                  copy_wiki_page(source_page) if source_page
-                end
-                
-              end
+              source_page = wiki_copy_source_page(config)
+              copy_wiki_page(source_page) if source_page.present?
             end
             return true
           end
@@ -38,6 +27,20 @@ module ChiliprojectAutoWiki
       end
 
       module InstanceMethods
+        def wiki_copy_source_page(config)
+          if project.present? &&
+              config.present? &&
+              config['project_id'].present? &&
+              config['wiki_page_name'].present?
+
+            # Valid page?
+            source_project = Project.find_by_id(config['project_id'])
+            if source_project
+              source_page = Wiki.find_page(config['wiki_page_name'], :project => source_project)
+            end
+          end
+        end
+
         def copy_wiki_page(source_page)
           auto_page = project.reload.wiki.pages.new(:title => source_page.title)
           auto_page.content = WikiContent.new(:text => source_page.text, :author => User.current)
