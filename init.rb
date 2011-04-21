@@ -15,3 +15,9 @@ Redmine::Plugin.register :chiliproject_auto_wiki do
              :wiki_page_name => ''
            })
 end
+require 'dispatcher'
+Dispatcher.to_prepare :chiliproject_auto_wiki do
+
+  require_dependency 'enabled_module'
+  EnabledModule.send(:include, ChiliprojectAutoWiki::Patches::EnabledModulePatch)
+end
