@@ -33,7 +33,6 @@ module ChiliprojectAutoWiki
               config['project_id'].present? &&
               config['wiki_page_name'].present?
 
-            # Valid page?
             source_project = Project.find_by_id(config['project_id'])
             if source_project
               source_page = Wiki.find_page(config['wiki_page_name'], :project => source_project)
