@@ -1,0 +1,16 @@
+<%
+  selected_project = Project.find_by_id(@settings['project_id']) if @settings['project_id'].present?
+  selected_project ||= nil
+%>
+<p>
+  <label for="settings_project_id"><%= l(:label_project) %></label>
+  <%= select_tag('settings[project_id]',
+                 options_for_select([[l(:label_none),'']]) +
+                 project_tree_options_for_select(Project.active, {:selected => selected_project}))
+                 %>
+</p>
+
+<p>
+  <label for="settings_wiki_page_name"><%= l(:label_wiki_page) %></label>
+  <%= text_field_tag('settings[wiki_page_name]', @settings['wiki_page_name']) %>
+</p>

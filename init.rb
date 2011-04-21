@@ -8,4 +8,10 @@ Redmine::Plugin.register :chiliproject_auto_wiki do
   author_url 'http://www.littlestreamsoftware.com'
 
   version '0.1.0'
+
+  settings(:partial => 'settings/auto_wiki',
+           :default => {
+             :project_id => '',
+             :wiki_page_name => ''
+           })
 end
