@@ -4,22 +4,33 @@ A plugin to create the starting wiki page for a project based on another wiki pa
 
 == Features
 
-TODO: fill in features
+Copy another project's wiki page when the Wiki module is enabled.
 
 == Getting the plugin
 
 A copy of the plugin can be downloaded from {Little Stream Software}[https://projects.littlestreamsoftware.com/projects/chiliproject_auto_wiki/files] or from {GitHub}[http://github.com/edavis10/chiliproject_auto_wiki]
 
-
 == Installation and Setup
 
 1. Follow the Redmine plugin installation steps at: http://www.redmine.org/wiki/redmine/Plugins 
-2. Run the plugin migrations +rake db:migrate_plugins+
-3. Restart your Redmine web servers (e.g. mongrel, thin, mod_rails)
+2. Restart your Redmine web servers (e.g. mongrel, thin, mod_rails)
+3. Configure the plugin: Admin > Plugins > Auto Wiki > Configure
 
 == Usage
 
-TODO: Add usage
+When the wiki module is enabled on a Project the plugin will copy the wiki page from the configured project.
+
+Example:
+
+  Configured project: Open Source Systems
+  Configured wiki page: Contribute
+
+1. Enable the Wiki module on a project ChiliProject.
+2. The wiki page "Contributed" will be copied from "Open Source Systems" to "ChiliProject"
+
+If the page already exists, it will *not* be copied
+
+This also happens when a project is created with a Wiki module as well as if the Wiki module is disabled and then re-enabled on a project.
 
 == License
 
