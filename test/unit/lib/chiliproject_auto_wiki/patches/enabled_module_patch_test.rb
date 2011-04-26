@@ -62,12 +62,8 @@ class ChiliprojectAutoWiki::Patches::EnabledModuleTest < ActionController::TestC
       setup do
         configure_plugin('project_id' => '')
       end
-      
-      should "not create any Wiki Pages" do
-        assert_no_difference('WikiPage.count') do
-          assert @module.save
-        end
-      end
+
+      should_not_create_a_wiki_page { assert @module.save }
       
     end
 
@@ -76,11 +72,7 @@ class ChiliprojectAutoWiki::Patches::EnabledModuleTest < ActionController::TestC
         configure_plugin('project_id' => @copy_project.id.to_s, 'wiki_page_name' => '')
       end
       
-      should "not create any Wiki Pages" do
-        assert_no_difference('WikiPage.count') do
-          assert @module.save
-        end
-      end
+      should_not_create_a_wiki_page { assert @module.save }
     end
 
     context "with a configured project but an unknown wiki page" do
@@ -88,11 +80,7 @@ class ChiliprojectAutoWiki::Patches::EnabledModuleTest < ActionController::TestC
         configure_plugin('project_id' => @copy_project.id.to_s, 'wiki_page_name' => 'Unknown')
       end
       
-      should "not create any Wiki Pages" do
-        assert_no_difference('WikiPage.count') do
-          assert @module.save
-        end
-      end
+      should_not_create_a_wiki_page { assert @module.save }
     end
     
   end

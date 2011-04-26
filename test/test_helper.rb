@@ -117,4 +117,13 @@ class ActiveSupport::TestCase
   def plugin_configuration
     Setting.plugin_chiliproject_auto_wiki
   end
+
+  def self.should_not_create_a_wiki_page(&block)
+    should "not create a wiki page" do
+      assert_no_difference('WikiPage.count') do
+        instance_eval(&block)
+      end
+    end
+  end
+  
 end
