@@ -41,6 +41,13 @@ class ChiliprojectAutoWiki::Patches::EnabledModuleTest < ActionController::TestC
         @project.reload
         assert_equal "Some content", @project.wiki.find_page("A Title").text
       end
+
+      should "add a comment to the copied wiki page" do
+        assert @module.save
+
+        @project.reload
+        assert_equal "Created by https://projects.littlestreamsoftware.com/projects/chiliproject_auto_wiki", @project.wiki.find_page("A Title").content.comments
+      end
       
       should "not copy the content if the wiki page exists in the new project" do
         @existing_page =  @project.wiki.pages.new(:title => 'A Title')

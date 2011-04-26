@@ -42,7 +42,9 @@ module ChiliprojectAutoWiki
 
         def copy_wiki_page(source_page)
           auto_page = project.reload.wiki.pages.new(:title => source_page.title)
-          auto_page.content = WikiContent.new(:text => source_page.text, :author => User.current)
+          auto_page.content = WikiContent.new(:text => source_page.text,
+                                              :author => User.current,
+                                              :comments => 'Created by https://projects.littlestreamsoftware.com/projects/chiliproject_auto_wiki')
           # Let save fail if there are validation errors: existing page with title, invalid title
           auto_page.save
         end
