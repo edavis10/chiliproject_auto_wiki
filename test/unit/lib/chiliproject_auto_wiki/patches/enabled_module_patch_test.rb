@@ -67,6 +67,14 @@ class ChiliprojectAutoWiki::Patches::EnabledModuleTest < ActionController::TestC
       
     end
 
+    context "with a configured but invalid project" do
+      setup do
+        configure_plugin('project_id' => 'invalid', 'wiki_page_name' => '')
+      end
+      
+      should_not_create_a_wiki_page { assert @module.save }
+    end
+
     context "with a configured project but no wiki page configured" do
       setup do
         configure_plugin('project_id' => @copy_project.id.to_s, 'wiki_page_name' => '')
