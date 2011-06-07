@@ -14,7 +14,14 @@ module ChiliprojectAutoWiki
             when 'wiki'
               config = Setting.plugin_chiliproject_auto_wiki
               source_page = wiki_copy_source_page(config)
-              copy_wiki_page(source_page) if source_page.present?
+              if source_page.present?
+                case config['auto_action']
+                when 'copy'
+                  copy_wiki_page(source_page)
+                when 'start'
+                  copy_wiki_page_to_start_page(source_page)
+                end
+              end
             end
             return true
           end
@@ -48,6 +55,16 @@ module ChiliprojectAutoWiki
           # Let save fail if there are validation errors: existing page with title, invalid title
           auto_page.save
         end
+
+        def copy_wiki_page_to_start_page(source_page)
+          auto_page = project.reload.wiki.pages.new(:title => project.wiki.start_page)
+          auto_page.content = WikiContent.new(:text => source_page.text,
+                                              :author => User.current,
+                                              :comments => 'Created by https://projects.littlestreamsoftware.com/projects/chiliproject_auto_wiki')
+          # Let save fail if there are validation errors: existing page with title, invalid title
+          auto_page.save
+        end
+        
 
       end
     end
