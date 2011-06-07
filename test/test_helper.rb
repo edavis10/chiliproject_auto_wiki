@@ -106,7 +106,8 @@ class ActiveSupport::TestCase
   def configure_plugin(configuration_change={})
     Setting.plugin_chiliproject_auto_wiki = {
       'project_id' => '',
-      'wiki_page_name' => ''
+      'wiki_page_name' => '',
+      'auto_action' => 'copy'
     }.merge(configuration_change)
   end
 

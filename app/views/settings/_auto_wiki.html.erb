@@ -14,3 +14,16 @@
   <label for="settings_wiki_page_name"><%= l(:label_wiki_page) %></label>
   <%= text_field_tag('settings[wiki_page_name]', @settings['wiki_page_name']) %>
 </p>
+
+<p><%= l(:label_auto_wiki_action) %></p>
+
+<p>
+  <label for="settings_auto_action_copy"><%= l(:label_auto_wiki_action_copy) %></label>
+  <%= radio_button_tag('settings[auto_action]', 'copy', @settings['auto_action'] == 'copy') %>
+</p>
+
+<p>
+  <label for="settings_auto_action_start"><%= l(:label_auto_wiki_action_make_start_page) %></label>
+  <%= radio_button_tag('settings[auto_action]', 'start', @settings['auto_action'] == 'start') %>
+</p>
+

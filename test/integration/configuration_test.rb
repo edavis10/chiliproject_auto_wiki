@@ -39,4 +39,27 @@ class ConfigurationTest < ActionController::IntegrationTest
 
     assert_equal "A Wiki Page", plugin_configuration['wiki_page_name']
   end
+
+  should "be able to choose to copy the wiki page" do
+    login_as(@user.login, 'test')
+    visit_configuration_panel
+
+    choose "Copy to project"
+    click_button 'Apply'
+
+    assert_equal "copy", plugin_configuration['auto_action']
+
+  end
+
+  should "be able to choose to copy the wiki page" do
+    login_as(@user.login, 'test')
+    visit_configuration_panel
+
+    choose "Make start page"
+    click_button 'Apply'
+
+    assert_equal "start", plugin_configuration['auto_action']
+
+  end
+
 end

@@ -12,7 +12,8 @@ Redmine::Plugin.register :chiliproject_auto_wiki do
   settings(:partial => 'settings/auto_wiki',
            :default => {
              :project_id => '',
-             :wiki_page_name => ''
+             :wiki_page_name => '',
+             :auto_action => 'copy'
            })
 end
 require 'dispatcher'
