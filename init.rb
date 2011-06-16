@@ -20,5 +20,7 @@ require 'dispatcher'
 Dispatcher.to_prepare :chiliproject_auto_wiki do
 
   require_dependency 'enabled_module'
-  EnabledModule.send(:include, ChiliprojectAutoWiki::Patches::EnabledModulePatch)
+  unless EnabledModule.included_modules.include? ChiliprojectAutoWiki::Patches::EnabledModulePatch
+    EnabledModule.send(:include, ChiliprojectAutoWiki::Patches::EnabledModulePatch)
+  end
 end

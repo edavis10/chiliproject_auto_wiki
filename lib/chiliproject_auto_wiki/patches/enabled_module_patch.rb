@@ -65,7 +65,7 @@ module ChiliprojectAutoWiki
         #
         # @param WikiPage source_page Wiki page to use as the source
         def copy_wiki_page_to_start_page(source_page)
-          create_new_page_based_on_existing_page(source_page, :title => project.wiki.start_page)
+          create_new_page_based_on_existing_page(source_page, :title => project.reload.wiki.start_page)
         end
 
         private
